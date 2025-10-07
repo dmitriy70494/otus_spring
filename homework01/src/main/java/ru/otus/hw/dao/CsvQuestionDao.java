@@ -21,14 +21,11 @@ public class CsvQuestionDao implements QuestionDao {
     @Override
     public List<Question> findAll() {
         var fileName = Objects.requireNonNull(fileNameProvider.getTestFileName());
-        try (BufferedReader reader =
-                     new BufferedReader(
-                             new InputStreamReader(
-                                     Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(fileName))
-                             )
-                     )
+        try (var inputStream = Objects.requireNonNull(getClass().getResourceAsStream(fileName));
+             var inputStreamReader = new InputStreamReader(inputStream);
+             var bufferedReader = new BufferedReader(inputStreamReader)
         ) {
-            return parseQuestionsFromCsv(reader);
+            return parseQuestionsFromCsv(bufferedReader);
         } catch (IOException e) {
             throw new QuestionReadException("Fail to parse question", e);
         }

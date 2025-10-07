@@ -3,11 +3,17 @@ package ru.otus.hw.service;
 import lombok.RequiredArgsConstructor;
 import ru.otus.hw.dao.QuestionDao;
 import ru.otus.hw.domain.Question;
+import ru.otus.hw.exceptions.QuestionReadException;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 public class TestServiceImpl implements TestService {
+
+    private static final String READ_EXCEPTION_MESSAGE = "There was a problem reading the question";
+
+    private static final String COMMON_EXCEPTION_MESSAGE =
+            "There was some problem, send message admin by e-mail d89086362742@yandex.ru";
 
     private final IOService ioService;
 
@@ -15,13 +21,21 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public void executeTest() {
-        ioService.printLine("");
-        ioService.printFormattedLine("Please answer the questions below");
-        var questions = questionDao.findAll();
-        printQuestions(questions);
+        try {
+            var questions = questionDao.findAll();
+            printQuestions(questions);
+        } catch (QuestionReadException qre) {
+            System.out.println(READ_EXCEPTION_MESSAGE);
+            qre.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(COMMON_EXCEPTION_MESSAGE);
+            e.printStackTrace();
+        }
     }
 
     private void printQuestions(List<Question> questions) {
+        ioService.printLine("");
+        ioService.printFormattedLine("Please answer the questions below");
         for (int q = 1; q <= questions.size(); q++) {
             ioService.printLine("");
             var question = questions.get(q - 1);

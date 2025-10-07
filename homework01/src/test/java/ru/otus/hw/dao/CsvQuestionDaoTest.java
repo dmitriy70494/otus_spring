@@ -21,17 +21,12 @@ class CsvQuestionDaoTest {
     @Test
     void findAllOk() {
         when(testFileNameProvider.getTestFileName()).thenReturn("questionsOk.csv");
-        var expectedAnswers =
-                List.of(
-                        new Question(
-                                "question",
-                                List.of(
-                                        new Answer("answer1", true),
-                                        new Answer("answer2", false)
-                                )
-                        )
-                );
-        Assertions.assertEquals(expectedAnswers, csvQuestionDao.findAll());
+        var answerOne = new Answer("answer1", true);
+        var answerTwo = new Answer("answer2", false);
+        var answers = List.of(answerOne, answerTwo);
+        var question = new Question("question", answers);
+        var expectedQuestions = List.of(question);
+        Assertions.assertEquals(expectedQuestions, csvQuestionDao.findAll());
     }
 
     @Test
