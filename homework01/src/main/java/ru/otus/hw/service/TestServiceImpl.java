@@ -25,11 +25,9 @@ public class TestServiceImpl implements TestService {
             var questions = questionDao.findAll();
             printQuestions(questions);
         } catch (QuestionReadException qre) {
-            System.out.println(READ_EXCEPTION_MESSAGE);
-            qre.printStackTrace();
+            ioService.printFormattedLine(READ_EXCEPTION_MESSAGE);
         } catch (Exception e) {
-            System.out.println(COMMON_EXCEPTION_MESSAGE);
-            e.printStackTrace();
+            ioService.printFormattedLine(COMMON_EXCEPTION_MESSAGE);
         }
     }
 
