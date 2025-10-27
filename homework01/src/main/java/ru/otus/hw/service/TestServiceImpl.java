@@ -13,7 +13,7 @@ public class TestServiceImpl implements TestService {
     private static final String READ_EXCEPTION_MESSAGE = "There was a problem reading the question";
 
     private static final String COMMON_EXCEPTION_MESSAGE =
-            "There was some problem, send message admin by e-mail d89086362742@yandex.ru";
+            "There was some problem, send message admin by e-mail d89086362742@yandex.ru, сообщение ошибки: %s";
 
     private final IOService ioService;
 
