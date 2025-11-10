@@ -20,7 +20,7 @@ class CsvQuestionDaoTest {
 
     @Test
     void findAllOk() {
-        when(testFileNameProvider.getTestFileName()).thenReturn("questionsOk.csv");
+        when(testFileNameProvider.getTestFileName()).thenReturn("/questionsOk.csv");
         var answerOne = new Answer("answer1", true);
         var answerTwo = new Answer("answer2", false);
         var answers = List.of(answerOne, answerTwo);
