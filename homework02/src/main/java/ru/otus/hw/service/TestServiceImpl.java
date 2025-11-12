@@ -26,13 +26,17 @@ public class TestServiceImpl implements TestService {
         var testResult = new TestResult(student);
 
         for (var question : questions) {
-            var max = question.answers().size() - 1;
-            var prompt = getPromptQuestion(question);
-            var errorMessage = String.format(ERROR_MESSAGE, max);
-            var answer = ioService.readIntForRangeWithPrompt(0, max, prompt, errorMessage);
+            var answer = askQuestion(question);
             testResult.applyAnswer(question, question.answers().get(answer).isCorrect());
         }
         return testResult;
+    }
+
+    private int askQuestion(Question question) {
+        var max = question.answers().size() - 1;
+        var prompt = getPromptQuestion(question);
+        var errorMessage = String.format(ERROR_MESSAGE, max);
+        return ioService.readIntForRangeWithPrompt(0, max, prompt, errorMessage);
     }
 
     private String getPromptQuestion(Question question) {

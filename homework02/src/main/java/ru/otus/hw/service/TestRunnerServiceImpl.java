@@ -11,7 +11,7 @@ public class TestRunnerServiceImpl implements TestRunnerService {
     private static final String READ_EXCEPTION_MESSAGE = "There was a problem reading the question";
 
     private static final String COMMON_EXCEPTION_MESSAGE =
-            "There was some problem, send message admin by e-mail d89086362742@yandex.ru, сообщение ошибки: %s";
+            "There was some problem, send message admin by e-mail d89086362742@yandex.ru";
 
     private final IOService ioService;
 
@@ -30,7 +30,7 @@ public class TestRunnerServiceImpl implements TestRunnerService {
         } catch (QuestionReadException qre) {
             ioService.printFormattedLine(READ_EXCEPTION_MESSAGE);
         } catch (Exception e) {
-            ioService.printFormattedLine(COMMON_EXCEPTION_MESSAGE, e.getMessage());
+            ioService.printFormattedLine(COMMON_EXCEPTION_MESSAGE);
         }
     }
 }
