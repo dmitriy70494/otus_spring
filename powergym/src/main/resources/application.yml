@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/powergym
+    username: your-username
+    password: your-password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+external:
+  api:
+    url: http://localhost:8081/api/data # Placeholder URL for the external service
